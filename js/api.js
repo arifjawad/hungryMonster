@@ -1,23 +1,33 @@
 
 const btn = document.getElementById('btn');
 
-btn.addEventListener('click', () => {
+    btn.addEventListener('click', () => {
     let displaySection = document.getElementById('displaySection');
+    let msg = document.getElementById('message');
     displaySection.style.display='block';
  
     let displayDiv = document.getElementById('display');
+    displayDiv.innerHTML='';
     let searchInput= document.getElementById('searchInput').value;
     if(searchInput != ""){
 
-  
+    
+       
 const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`;
 fetch(url)
 .then(response => response.json())
-.then(data =>foundMeal(data.meals[0]));
-   let foundMeal = (mealItem) =>{
-    
-  
+.then(data =>foundMeal(data.meals[0]))
+.catch(err =>{
+    console.log(err);
+    msg.style.display='block';
+    msg.innerText="No results Found !";
+   
+  });
 
+
+
+  msg.style.display='none';
+       let foundMeal = (mealItem) =>{
         let showMealItem = document.createElement('div');
         showMealItem.className = 'col-md-3 ml-5 mb-5';
       
@@ -48,9 +58,9 @@ fetch(url)
     }
 
 
- let searchSection = document.getElementById('searchSection');
- searchSection.style.display='none';
- displayDiv.style.display='none';
+                let searchSection = document.getElementById('searchSection');
+              searchSection.style.display='none';
+                displayDiv.style.display='none';
 
                 let itemDetailsDiv = document.getElementById('itemDetails');
                 let showDetails = document.createElement('div');
@@ -75,57 +85,16 @@ fetch(url)
 })
 }
 
-    }else{
-        document.getElementById('message').innerText='No results Found!'
+  
+  
+  
+  }else{
+    
+     msg.style.display='block';
+     msg.innerText='Insert a meal name!';
     }
+  
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-//  const fetchDatas = foundMeals =>{
-     
     
-//     const displayDiv = document.getElementById('display');
-
-//     displayDiv.innerText=foundMeals;
-
-// var arr= foundMeals[0];
-//     arr.forEach( meals=>{
-//         const mealItem = document.createElement('div');
-//         mealItem.className = 'mealItem';
-//         const itemInfo = `
-//             <h3 class="itemName">${meals.strMeal}</h3>
-//             <p>${meals.strCategory}</p>
-           
-//         `;
-//         mealItem.innerHTML = itemInfo;
-//         displayDiv.appendChild(mealItem);
-//     });
-//}
-
-
-// const displayCountries = countries =>{
-//     const countriesDiv = document.getElementById('countries');
-//     countries.forEach(country => {
-//         const countryDiv = document.createElement('div');
-//         countryDiv.className = 'country';
-//         const countryInfo = `
-//             <h3 class="country-name">${country.name}</h3>
-//             <p>${country.capital}</p>
-//             <button onclick="displayCountryDetail('${country.name}')">Details</button>
-//         `;
-//         countryDiv.innerHTML = countryInfo;
-//         countriesDiv.appendChild(countryDiv);
-//     });
-// }

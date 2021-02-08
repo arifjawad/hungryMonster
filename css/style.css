@@ -106,3 +106,12 @@ li i{
 #itemDetails{
    margin-left: 30%;
    }
+   #message{
+       width:400px;
+       margin-left: 38%;
+       
+       text-align: center;
+       background-color: var(--color-orange);
+       color: var(--color-white);
+       display: none;
+   }
